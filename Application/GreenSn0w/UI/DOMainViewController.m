@@ -520,6 +520,22 @@ static UIFont *CLIFont(CGFloat size)
     [self updateRowStates];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *crashReportPath = [docsDir stringByAppendingPathComponent:@"last_crash.txt"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:crashReportPath]) {
+        NSString *crashInfo = [NSString stringWithContentsOfFile:crashReportPath encoding:NSUTF8StringEncoding error:nil] ?: @"Unknown crash";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"GreenSn0w crashed last time" message:crashInfo preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSFileManager defaultManager] removeItemAtPath:crashReportPath error:nil];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
 - (void)fadeToBlack:(void (^)(void))completion
 {
     static bool didFade = false;
