@@ -96,7 +96,7 @@
 "None" = "Ninguno";
 "Recommended" = "Recomendado";
 
-// Solución alternativa DarkSword
+// Solución alternativa GreenSword
 "Respring_Required" = "Se requiere respring";
 "Respring_Required_Message" = "El exploit de kernel seleccionado requiere crear un mapeo de memoria contiguo que, en este dispositivo, solo es posible mediante una solución especial que realiza un respring. Una vez completado el respring, vuelve a abrir la app GreenSn0w y pulsa \"Jailbreak\" de nuevo.";
 "Respring_Required_Notice_A8" = "En tu dispositivo, esta solución no funciona siempre y puede que tengas que aplicarla varias veces hasta que esta alerta deje de aparecer.";
