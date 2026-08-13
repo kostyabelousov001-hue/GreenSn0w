@@ -17,6 +17,7 @@
 #import "DOSettingsController.h"
 #import <pthread.h>
 #import <sys/sysctl.h>
+#import <sys/utsname.h>
 #import <libjailbreak/libjailbreak.h>
 
 static UIColor *CLIColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a) {
