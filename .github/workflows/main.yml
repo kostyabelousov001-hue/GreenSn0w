@@ -62,6 +62,12 @@ jobs:
           rm $THEOS/sdks/iPhoneOS16.5.sdk.tar
           cd $BASEDIR
 
+      - name: Cache THEOS + SDK
+        uses: actions/cache@v4
+        with:
+          path: theos
+          key: theos-${{ hashFiles('install-theos.sh') }}
+
       - name: Build and Install trustcache
         run: |
           set -x
@@ -91,6 +97,12 @@ jobs:
             set -x
             cd Application/GreenSn0w/Resources
             ./download_bootstraps.sh
+
+      - name: Cache Bootstraps
+        uses: actions/cache@v4
+        with:
+          path: Application/GreenSn0w/Resources/bootstrap_*.tar.zst
+          key: bootstraps-1800-1900
 
       - name: Build
         run: |
