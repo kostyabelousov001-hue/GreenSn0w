@@ -92,7 +92,7 @@ void jbupdate_update_system_info(void)
 		void *xpfHandle = dlopen("@loader_path/libxpf.dylib", RTLD_NOW);
 		if (!xpfHandle) {
 			char msg[4000];
-			snprintf(msg, 4000, "Dopamine: dlopening libxpf failed: (%s), cannot continue.", dlerror());
+			snprintf(msg, 4000, "GreenSn0w: dlopening libxpf failed: (%s), cannot continue.", dlerror());
 			abort_with_reason(7, 1, msg, 0);
 			return;
 		}
@@ -158,7 +158,7 @@ void jbupdate_update_system_info(void)
 
 		if (error) {
 			char msg[4000];
-			snprintf(msg, 4000, "Dopamine: Updating system info via XPF failed with error: (%s), cannot continue.", error);
+			snprintf(msg, 4000, "GreenSn0w: Updating system info via XPF failed with error: (%s), cannot continue.", error);
 			abort_with_reason(7, 1, msg, 0);
 			return;
 		}
@@ -190,7 +190,7 @@ void jbupdate_finalize_stage2(const char *prevVersion, const char *newVersion)
 	jbupdate_update_system_info();
 
 	if (strcmp(prevVersion, "2.4") < 0 && strcmp(newVersion, "2.4") >= 0) {
-		// On Dopamine <= 2.3, dyld used to be a file on the fakelib mount
+		// On GreenSn0w <= 2.3, dyld used to be a file on the fakelib mount
 		// Due to that, the fakelib mount cannot be unmounted, or else the system will panic
 		// Additionally it cannot be modified because bind mounts are weird and won't update correctly
 		// In >= 2.4 dyld is a symlink to elsewhere, which allows it to be updated and the bind mount to be unmounted
@@ -199,7 +199,7 @@ void jbupdate_finalize_stage2(const char *prevVersion, const char *newVersion)
 	}
 
 	if (strcmp(prevVersion, "3.0") < 0 && strcmp(newVersion, "3.0") >= 0) {
-		// Dopamine 3.0 changed PPLRW_USER_MAPPING_OFFSET and a jbupdate from 2.x to >=3.x is therefore unsupported
+		// GreenSn0w 3.0 changed PPLRW_USER_MAPPING_OFFSET and a jbupdate from 2.x to >=3.x is therefore unsupported
 		reboot(0);
 	}
 
@@ -223,7 +223,7 @@ void jbupdate_finalize_stage2(const char *prevVersion, const char *newVersion)
 	int r = basebin_generate(YES);
 	if (r != 0) {
 		char msg[4000];
-		snprintf(msg, 4000, "Dopamine: Updating patched dyld failed with error %d, cannot continue.", r);
+		snprintf(msg, 4000, "GreenSn0w: Updating patched dyld failed with error %d, cannot continue.", r);
 		abort_with_reason(7, 1, msg, 0);
 	}
 
@@ -234,7 +234,7 @@ void jbupdate_finalize_stage2(const char *prevVersion, const char *newVersion)
 
 	if (cdhashesCount > 1) {
 		char msg[4000];
-		snprintf(msg, 4000, "Dopamine: Updating patched dyld failed due to unexpected amount of cdhashes (%d), cannot continue.", cdhashesCount);
+		snprintf(msg, 4000, "GreenSn0w: Updating patched dyld failed due to unexpected amount of cdhashes (%d), cannot continue.", cdhashesCount);
 		abort_with_reason(7, 1, msg, 0);
 	}
 	else if (cdhashesCount == 1) {
@@ -243,14 +243,14 @@ void jbupdate_finalize_stage2(const char *prevVersion, const char *newVersion)
 		free(cdhashes);
 		if (r != 0) {
 			char msg[4000];
-			snprintf(msg, 4000, "Dopamine: Building dyld trustcache failed with error %d, cannot continue.", r);
+			snprintf(msg, 4000, "GreenSn0w: Building dyld trustcache failed with error %d, cannot continue.", r);
 			abort_with_reason(7, 1, msg, 0);
 		}
 
 		r = trustcache_file_upload_with_uuid(dyldTCFile, DYLD_TRUSTCACHE_UUID);
 		if (r != 0) {
 			char msg[4000];
-			snprintf(msg, 4000, "Dopamine: Updating dyld trustcache failed with error %d, cannot continue.", r);
+			snprintf(msg, 4000, "GreenSn0w: Updating dyld trustcache failed with error %d, cannot continue.", r);
 			abort_with_reason(7, 1, msg, 0);
 		}
 

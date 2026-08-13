@@ -1,5 +1,5 @@
-Package: libkrw0-dopamine
-Name: libkrw Plug-in (Dopamine)
+Package: libkrw0-greensn0w
+Name: libkrw Plug-in (GreenSn0w)
 Author: opa334 <opa334@protonmail.com>
 Maintainer: opa334 <opa334@protonmail.com>
 Architecture: iphoneos-arm64
@@ -8,5 +8,5 @@ Provides: libkrw0-plugin
 Depends: libiosexec1 (>= 1.3.1)
 Section: Libraries
 Priority: standard
-Homepage: https://github.com/opa334/Dopamine/tree/main/Packages/libkrw-provider
-Description: libkrw Plug-in for Dopamine (Shared Library)
+Homepage: https://github.com/kostyabelousov001-hue/GreenSn0w/tree/main/Packages/libkrw-provider
+Description: libkrw Plug-in for GreenSn0w (Shared Library)

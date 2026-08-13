@@ -173,7 +173,7 @@ int jbctl_handle_internal(const char *command, int argc, char* argv[])
 		protection_set_active(true);
 		char *panicMessage = NULL;
 		if (jbclient_watchdog_get_last_userspace_panic(&panicMessage) == 0) {
-			NSString *printMessage = [NSString stringWithFormat:@"Dopamine has protected you from a userspace panic by temporarily disabling tweak injection and triggering a userspace reboot instead. A log is available under Analytics in the Preferences app. You can reenable tweak injection in the Dopamine app.\n\nPanic message: \n%s", panicMessage];
+			NSString *printMessage = [NSString stringWithFormat:@"GreenSn0w has protected you from a userspace panic by temporarily disabling tweak injection and triggering a userspace reboot instead. A log is available under Analytics in the Preferences app. You can reenable tweak injection in the GreenSn0w app.\n\nPanic message: \n%s", panicMessage];
 			CFUserNotificationDisplayAlert(0, 2/*kCFUserNotificationCautionAlertLevel*/, NULL, NULL, NULL, CFSTR("Watchdog Timeout"), (__bridge CFStringRef)printMessage, NULL, NULL, NULL, NULL);
 			free(panicMessage);
 		}

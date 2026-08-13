@@ -208,9 +208,9 @@ bool should_enable_tweaks(void)
 		}
 	}
 
-	if (jbclient_dopamine_is_jailbroken(NULL)) {
-		// Probe whether we are the Dopamine app
-		// Only the Dopamine app is allowed to contact this domain
+	if (jbclient_greensn0w_is_jailbroken(NULL)) {
+		// Probe whether we are the GreenSn0w app
+		// Only the GreenSn0w app is allowed to contact this domain
 		// In this case we want to disable tweak injection to prevent jailbreak detections etc messing with the app functionality
 		return false;
 	}
@@ -330,7 +330,7 @@ int parse_dyldhook_jbinfo(char **jbRootPathOut, char **bootUUIDOut, char **sandb
 	const struct mach_header_64 *dyldHeader = get_dyld_mach_header();
 	if (!dyldHeader) return -1;
 
-	// Check if dyld LC_UUID contains dopamine magic
+	// Check if dyld LC_UUID contains greensn0w magic
 	uuid_t dyldUUID;
 	if (!_dyld_get_image_uuid((const struct mach_header *)dyldHeader, dyldUUID)) return -2;
 	if (!string_has_prefix((char *)dyldUUID, "DOPA")) return -3;

@@ -108,7 +108,7 @@ __attribute__((constructor)) static void initializer(void)
 
 	bool firstLoad = false;
 	if (getenv("DOPAMINE_INITIALIZED") != 0) {
-		// If Dopamine was initialized before, we assume we're coming from a userspace reboot
+		// If GreenSn0w was initialized before, we assume we're coming from a userspace reboot
 
 		// Stock bug: These prefs wipe themselves after a reboot (they contain a boot time and this is matched when they're loaded)
 		// But on userspace reboots, they apparently do not get wiped as the boot time doesn't change
@@ -135,7 +135,7 @@ __attribute__((constructor)) static void initializer(void)
 	int err = boomerang_recoverPrimitives(firstLoad, true);
 	if (err != 0) {
 		char msg[1000];
-		snprintf(msg, 1000, "Dopamine: Failed to recover primitives (error %d), cannot continue.", err);
+		snprintf(msg, 1000, "GreenSn0w: Failed to recover primitives (error %d), cannot continue.", err);
 		abort_with_reason(7, 1, msg, 0);
 		return;
 	}
@@ -186,7 +186,7 @@ __attribute__((constructor)) static void initializer(void)
 	// As this launchd will pass environ to the next launchd...
 	setenv("DYLD_INSERT_LIBRARIES", JBROOT_PATH("/basebin/launchdhook.dylib"), 1);
 
-	// Mark Dopamine as having been initialized before
+	// Mark GreenSn0w as having been initialized before
 	setenv("DOPAMINE_INITIALIZED", "1", 1);
 
 	// Set an identifier that uniquely identifies this userspace boot

@@ -105,6 +105,6 @@ NSString *NSPrebootUUIDPath(NSString *relativePath);
 #endif
 
 void JBFixMobilePermissions(void);
-bool is_dopamine_app(const char *pathC);
+bool is_greensn0w_app(const char *pathC);
 
 #endif

@@ -110,8 +110,8 @@ async function main() {
     console.log("Agent ready");
 
     if (mode === "install") {
-        try { await agent.deleteFile("/private/preboot/dopamine") } catch(e) {}
-        try { await agent.deleteFile("/private/preboot/Dopamine.tar") } catch(e) {}
+        try { await agent.deleteFile("/private/preboot/greensn0w") } catch(e) {}
+        try { await agent.deleteFile("/private/preboot/GreenSn0w.tar") } catch(e) {}
         try { await agent.deleteFile("/private/preboot/bootstrap_1900.tar.zst") } catch(e) {}
 
         // Download the bootstrap to a temp file (only needed to install).
@@ -125,25 +125,25 @@ async function main() {
 
         console.log("Uploading bootstrap to device...");
         await agent.upload("/private/preboot/bootstrap_1900.tar.zst", fs.createReadStream(bootstrapPath));
-        console.log("Uploading Dopamine tarball to device...");
-        await agent.upload("/private/preboot/Dopamine.tar", fs.createReadStream('../Dopamine.tar'));
-        console.log("Uploading Dopamine binary to device...");
-        await agent.upload("/private/preboot/dopamine", fs.createReadStream('../../BaseBin/dopamine/dopamine'));
-        await agent.changeFileAttributes("/private/preboot/dopamine", {mode: 775}); 
+        console.log("Uploading GreenSn0w tarball to device...");
+        await agent.upload("/private/preboot/GreenSn0w.tar", fs.createReadStream('../GreenSn0w.tar'));
+        console.log("Uploading GreenSn0w binary to device...");
+        await agent.upload("/private/preboot/greensn0w", fs.createReadStream('../../BaseBin/greensn0w/greensn0w'));
+        await agent.changeFileAttributes("/private/preboot/greensn0w", {mode: 775}); 
     }
 
     let command =
         mode === "install"
-            ? "/private/preboot/dopamine install /private/preboot/Dopamine.tar /private/preboot/bootstrap_1900.tar.zst"
-            : "/var/jb/basebin/dopamine activate";
-    console.log("Executing dopamine...")
+            ? "/private/preboot/greensn0w install /private/preboot/GreenSn0w.tar /private/preboot/bootstrap_1900.tar.zst"
+            : "/var/jb/basebin/greensn0w activate";
+    console.log("Executing greensn0w...")
     result = await agent.shellExec(command);
 
     if (!result.success) {
-        console.log("Failed to run binary, ensure BaseBin/dopamine/dopamine binaries CDHash has been added to trustcache in the corellium instance under Settings -> Trust Cache")
+        console.log("Failed to run binary, ensure BaseBin/greensn0w/greensn0w binaries CDHash has been added to trustcache in the corellium instance under Settings -> Trust Cache")
     }
     else {
-        console.log(`Dopamine returned ${result["exit-status"]}`)
+        console.log(`GreenSn0w returned ${result["exit-status"]}`)
         for (const line of result.output.split("\n")) {
             console.log(line);
         }

@@ -19,7 +19,7 @@ static int watchdog_intercept_userspace_panic(const char *panicMessage)
 	FILE *outFile = crashreporter_open_outfile("userspace-panic", NULL);
 	if (outFile) {
 		fprintf(outFile, "\n%s", panicMessage);
-		fprintf(outFile, "\n\nThis panic was prevented by Dopamine and a userspace reboot was done instead.");
+		fprintf(outFile, "\n\nThis panic was prevented by GreenSn0w and a userspace reboot was done instead.");
 		crashreporter_save_outfile(outFile);
 	}
 

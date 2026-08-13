@@ -1,4 +1,4 @@
-name: "Dopamine: build and upload"
+name: "GreenSn0w: build and upload"
 
 on:
   push:
@@ -89,7 +89,7 @@ jobs:
       - name: Download Bootstraps
         run: |
             set -x
-            cd Application/Dopamine/Resources
+            cd Application/GreenSn0w/Resources
             ./download_bootstraps.sh
 
       - name: Build
@@ -100,9 +100,9 @@ jobs:
           gmake -j$(sysctl -n hw.logicalcpu) NIGHTLY=1
 
       - name: Upload Artifact
-        id: dopamine-latest-upload
+        id: greensn0w-latest-upload
         uses: actions/upload-artifact@main
         with:
-          name: Dopamine
+          name: GreenSn0w
           path: |
-            ${{ github.workspace }}/Application/Dopamine.ipa
+            ${{ github.workspace }}/Application/GreenSn0w.ipa

@@ -16,7 +16,7 @@ enum {
 };
 
 // Domain: Platform
-// Reachable from all processes that have CS_PLATFORMIZED or are entitled with platform-application or are the Dopamine app itself
+// Reachable from all processes that have CS_PLATFORMIZED or are entitled with platform-application or are the GreenSn0w app itself
 #define JBS_DOMAIN_PLATFORM 2
 enum {
     JBS_PLATFORM_SET_PROCESS_DEBUGGED = 1,
@@ -48,8 +48,8 @@ enum {
     JBS_ROOT_TRUSTCACHE_CLEAR,
 };
 
-// Domain: Dopamine
-// Reachable exclusively from Dopamine app
+// Domain: GreenSn0w
+// Reachable exclusively from GreenSn0w app
 #define JBS_DOMAIN_DOPAMINE 5
 enum {
     JBS_DOPAMINE_IS_JAILBROKEN = 1,

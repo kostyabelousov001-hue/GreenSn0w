@@ -501,7 +501,7 @@ int jbclient_boomerang_done(void)
 	return -1;
 }
 
-bool jbclient_dopamine_is_jailbroken(char **version)
+bool jbclient_greensn0w_is_jailbroken(char **version)
 {
 	xpc_object_t xreply = jbserver_xpc_send(JBS_DOMAIN_DOPAMINE, JBS_DOPAMINE_IS_JAILBROKEN, NULL);
 	if (xreply) {
@@ -516,7 +516,7 @@ bool jbclient_dopamine_is_jailbroken(char **version)
 	return false;
 }
 
-int jbclient_dopamine_get_root(void)
+int jbclient_greensn0w_get_root(void)
 {
 	xpc_object_t xreply = jbserver_xpc_send(JBS_DOMAIN_DOPAMINE, JBS_DOPAMINE_GET_ROOT, NULL);
 	if (xreply) {
@@ -527,7 +527,7 @@ int jbclient_dopamine_get_root(void)
 	return -1;
 }
 
-int jbclient_dopamine_drop_root(void)
+int jbclient_greensn0w_drop_root(void)
 {
 	xpc_object_t xreply = jbserver_xpc_send(JBS_DOMAIN_DOPAMINE, JBS_DOPAMINE_DROP_ROOT, NULL);
 	if (xreply) {

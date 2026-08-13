@@ -9,7 +9,7 @@
 
 all: basebin.tar
 
-subprojects: ChOma XPF MachOMerger opainject libjailbreak systemhook forkfix launchdhook hookd boomerang jbctl idownloadd watchdoghook rootlesshooks dopamine
+subprojects: ChOma XPF MachOMerger opainject libjailbreak systemhook forkfix launchdhook hookd boomerang jbctl idownloadd watchdoghook rootlesshooks greensn0w
 
 ChOma: .build .include
 	@$(MAKE) -C ChOma TARGET=ios DISABLE_SIGNING=1 DISABLE_TESTS=1 DYLIB_LDFLAGS="-install_name @loader_path/libchoma.dylib"
@@ -75,9 +75,9 @@ rootlesshooks: .build .include libjailbreak
 	$(MAKE) -C rootlesshooks
 	@cp rootlesshooks/.theos/obj/rootlesshooks.dylib .build
 
-dopamine: .build .include libjailbreak XPF ChOma
-	$(MAKE) -C dopamine
-	@cp dopamine/dopamine .build
+greensn0w: .build .include libjailbreak XPF ChOma
+	$(MAKE) -C greensn0w
+	@cp greensn0w/greensn0w .build
 
 .build:
 	rm -rf .build
@@ -122,7 +122,7 @@ clean:
 	@$(MAKE) -C watchdoghook $@
 	@$(MAKE) -C rootlesshooks $@
 	@$(MAKE) -C dyldhook $@
-	@$(MAKE) -C dopamine $@
+	@$(MAKE) -C greensn0w $@
 	@$(MAKE) -C hookd $@
 	@rm -rf .build
 	@rm -rf .include

@@ -45,14 +45,14 @@ int main(int argc, char* argv[])
 	}
 
 	if (getuid() != 0 && geteuid() == 0) {
-		// When jailbroken the Dopamine app cannot have uid 0 because it can't drop it anymore without loosing it
+		// When jailbroken the GreenSn0w app cannot have uid 0 because it can't drop it anymore without loosing it
 		// So in some cases (e.g. for spawning dpkg) we need to use jbctl to get it
 		setuid(0);
 	}
 
 	if (argc > 2) {
 		if (!strcmp(argv[argc-2], "--waitfor")) {
-			// When the Dopamine app spawns jbctl it needs to clean up it's own ucred before jbctl does the requested action
+			// When the GreenSn0w app spawns jbctl it needs to clean up it's own ucred before jbctl does the requested action
 			// For this it will attach a pipe fd and write to it once the cleanup is done, so we need to wait until that write happens
 			int fd = atoi(argv[argc-1]);
 			int r = 0;
@@ -178,12 +178,12 @@ int main(int argc, char* argv[])
 				return 5;
 			}
 
-			LSApplicationProxy *dopamineAppProxy = [LSApplicationProxy applicationProxyForIdentifier:@"com.opa334.Dopamine"];
-			if (!dopamineAppProxy) {
-				printf("Unable to locate newly installed Dopamine build.\n");
+			LSApplicationProxy *greensn0wAppProxy = [LSApplicationProxy applicationProxyForIdentifier:@"com.greensn0w.app"];
+			if (!greensn0wAppProxy) {
+				printf("Unable to locate newly installed GreenSn0w build.\n");
 				return 6;
 			}
-			updateFile = strdup([dopamineAppProxy.bundleURL.path stringByAppendingPathComponent:@"basebin.tar"].fileSystemRepresentation);
+			updateFile = strdup([greensn0wAppProxy.bundleURL.path stringByAppendingPathComponent:@"basebin.tar"].fileSystemRepresentation);
 			// Fall through to basebin installation
 		}
 		else if (!strcmp(updateType, "tarball")) {

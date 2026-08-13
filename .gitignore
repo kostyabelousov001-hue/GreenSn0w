@@ -6,7 +6,8 @@ xcshareddata/
 DerivedData/
 .swiftpm/xcode/
 /Package.resolved
-Dopamine/Dopamine/bootstrap/tmp/
+GreenSn0w/GreenSn0w/bootstrap/tmp/
+Application/GreenSn0w/bootstrap/tmp/
 Application/Payload
 .idea
 Tools/fastPathSign/.build_*

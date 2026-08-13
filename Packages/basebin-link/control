@@ -1,5 +1,5 @@
-Package: dopamine-basebin-link
-Name: Dopamine BaseBin Link
+Package: greensn0w-basebin-link
+Name: GreenSn0w BaseBin Link
 Author: opa334 <opa334@protonmail.com>
 Maintainer: opa334 <opa334@protonmail.com>
 Architecture: iphoneos-arm64
@@ -7,5 +7,5 @@ Version: 1.0.0
 Provides: opainject
 Section: Libraries
 Priority: standard
-Homepage: https://github.com/opa334/Dopamine/tree/main/BaseBin
-Description: Symlinks to Dopamine Base Binaries
+Homepage: https://github.com/kostyabelousov001-hue/GreenSn0w/tree/main/BaseBin
+Description: Symlinks to GreenSn0w Base Binaries

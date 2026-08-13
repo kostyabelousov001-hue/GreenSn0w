@@ -13,7 +13,7 @@
 #include "dyld_jbinfo.h"
 #include "dyld.h"
 
-// When hiding the jailbreak in Dopamine settings, a lot of processes will crash due to the /usr/lib mount disappearing
+// When hiding the jailbreak in GreenSn0w settings, a lot of processes will crash due to the /usr/lib mount disappearing
 // Anything that has libraries inside /usr/lib that are not in the shared cache (e.g. libobjc_trampolines.dylib) mapped in will crash
 // We solve this here by redirecting dlopen calls for files in /usr/lib to /var/jb/basebin/.fakelib (if the latter is accessible)
 // This way the vnode will not be on /usr/lib mount and the /usr/lib mount therefore can be unmounted without making stuff crash
