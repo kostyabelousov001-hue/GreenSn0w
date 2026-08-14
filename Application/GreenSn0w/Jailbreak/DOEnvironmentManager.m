@@ -29,10 +29,6 @@
 #import "NSData+Hex.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
-const char *gs_webhook_part_a(void) {
-    return "68747470733A2F2F646973636F72642E636F6D";
-}
-
 int reboot3(uint64_t flags, ...);
 CFPropertyListRef MGCopyAnswer(CFStringRef);
 extern char **environ;

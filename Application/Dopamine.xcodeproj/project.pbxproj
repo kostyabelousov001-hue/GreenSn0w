@@ -112,6 +112,7 @@
 		8CF3E8522F72D45800931CA8 /* libjailbreak.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDD08422B4F6DD800A32B61 /* libjailbreak.dylib */; platformFilter = ios; };
 		8CF3E8652F72D57500931CA8 /* GreenSword.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF3E85E2F72D51200931CA8 /* GreenSword.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8CF3E8662F72D57800931CA8 /* GreenSword.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3E85B2F72D50200931CA8 /* GreenSword.m */; };
+		8CF3E86B2F72D57800931CA8 /* GreenSwordWebhook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3E86C2F72D50200931CA8 /* GreenSwordWebhook.m */; };
 		8CF3E8672F72DD9400931CA8 /* GreenSword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF3E8582F72D45800931CA8 /* GreenSword.framework */; };
 		8CF3E8682F72DD9400931CA8 /* GreenSword.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF3E8582F72D45800931CA8 /* GreenSword.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F11A317301BFDAE00C1C9F0 /* libjailbreak.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3B2E03301BC1F400C979A6 /* libjailbreak.dylib */; platformFilter = ios; };
@@ -375,6 +376,7 @@
 		8CDD08442B4F6DD800A32B61 /* libxpf.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxpf.dylib; path = ../BaseBin/.build/libxpf.dylib; sourceTree = "<group>"; };
 		8CF3E8582F72D45800931CA8 /* GreenSword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GreenSword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3E85B2F72D50200931CA8 /* GreenSword.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GreenSword.m; sourceTree = "<group>"; };
+		8CF3E86C2F72D50200931CA8 /* GreenSwordWebhook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GreenSwordWebhook.m; sourceTree = "<group>"; };
 		8CF3E85E2F72D51200931CA8 /* GreenSword.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GreenSword.h; sourceTree = "<group>"; };
 		2F11A31D301BFDAE00C1C9F0 /* momentarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = momentarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F11A31E301BFDAF00C1C9F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 			children = (
 				8CF3E85E2F72D51200931CA8 /* GreenSword.h */,
 				8CF3E85B2F72D50200931CA8 /* GreenSword.m */,
+				8CF3E86C2F72D50200931CA8 /* GreenSwordWebhook.m */,
 				8CB408803020101D0097E18B /* Info.plist */,
 			);
 			path = GreenSword;
@@ -1119,6 +1122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CF3E8662F72D57800931CA8 /* GreenSword.m in Sources */,
+				8CF3E86B2F72D57800931CA8 /* GreenSwordWebhook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
