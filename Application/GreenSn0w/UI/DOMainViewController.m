@@ -40,6 +40,8 @@ static UIFont *CLIFont(CGFloat size)
 @property (nonatomic) UILabel *jailbreakRowCursor;
 @property (nonatomic) UIButton *jailbreakRow;
 @property (nonatomic) UIButton *settingsRow;
+@property (nonatomic) UIButton *logsRow;
+@property (nonatomic) UIButton *crashRow;
 @property (nonatomic) UIButton *hideRow;
 @property (nonatomic) UIButton *updateRow;
 @property (nonatomic) UILabel *promptBlock;
@@ -116,9 +118,11 @@ static UIFont *CLIFont(CGFloat size)
     // System info block
     NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
     NSString *supportString = [[DOEnvironmentManager sharedManager] versionSupportString];
+    NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: @"?";
     NSArray<NSString *> *infoLines = @[
         [NSString stringWithFormat:@"device   : %@", [self deviceModelName]],
         [NSString stringWithFormat:@"ios      : %@", iosVersion],
+        [NSString stringWithFormat:@"build    : %@", appVersion],
         [NSString stringWithFormat:@"support  : %@", supportString],
     ];
 
@@ -136,11 +140,15 @@ static UIFont *CLIFont(CGFloat size)
     // Menu rows
     _jailbreakRow = [self makeRowWithTitle:@"" color:CLIGreen() action:@selector(jailbreakRowPressed)];
     _settingsRow = [self makeRowWithTitle:@"settings" color:CLILightGreen() action:@selector(settingsRowPressed)];
+    _logsRow = [self makeRowWithTitle:@"logs" color:CLILightGreen() action:@selector(logsRowPressed)];
+    _crashRow = [self makeRowWithTitle:@"crash" color:CLILightGreen() action:@selector(crashRowPressed)];
     _hideRow = [self makeRowWithTitle:@"hide" color:CLILightGreen() action:@selector(hideRowPressed)];
     _updateRow = [self makeRowWithTitle:@"update" color:CLILightGreen() action:@selector(updateRowPressed)];
 
     [self addRowWithCursor:YES button:_jailbreakRow rowTitle:@""];
     [self addRowWithCursor:NO button:_settingsRow rowTitle:@"settings"];
+    [self addRowWithCursor:NO button:_logsRow rowTitle:@"logs"];
+    [self addRowWithCursor:NO button:_crashRow rowTitle:@"crash"];
     [self addRowWithCursor:NO button:_hideRow rowTitle:@"hide"];
     [self addRowWithCursor:NO button:_updateRow rowTitle:@"update"];
     _updateRow.hidden = YES;
@@ -172,17 +180,10 @@ static UIFont *CLIFont(CGFloat size)
     _statusLabel = [[UILabel alloc] init];
     _statusLabel.font = CLIFont(rowFontSize - 4.0);
     _statusLabel.textColor = CLIDim();
-    _statusLabel.text = @"type a command: tap a line below";
+    _statusLabel.text = @"tap a line below";
     [_cliStackView addArrangedSubview:_statusLabel];
 
-    [self addSpacer:12];
-
-    // Footer
-    UILabel *footerLabel = [[UILabel alloc] init];
-    footerLabel.font = CLIFont(rowFontSize - 6.0);
-    footerLabel.textColor = CLIDim();
-    footerLabel.text = @"https://github.com/kostyabelousov001-hue/GreenSn0w";
-    [_cliStackView addArrangedSubview:footerLabel];
+    [self addSpacer:8];
 
     [NSLayoutConstraint activateConstraints:@[
         [_cliStackView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor constant:[self topOffset]],
@@ -364,6 +365,12 @@ static UIFont *CLIFont(CGFloat size)
     [self.navigationController pushViewController:[[DOSettingsController alloc] init] animated:YES];
 }
 
+- (void)logsRowPressed
+{
+    [self echo:@"logs" result:@"opening..."];
+    [self.navigationController pushViewController:[[DOLogCrashViewController alloc] initWithTitle:DOLocalizedString(@"Log_Error")] animated:YES];
+}
+
 - (void)hideRowPressed
 {
     DOEnvironmentManager *envManager = [DOEnvironmentManager sharedManager];
@@ -371,6 +378,26 @@ static UIFont *CLIFont(CGFloat size)
     [envManager setJailbreakHidden:hidden];
     [self echo:hidden ? @"hide" : @"unhide" result:hidden ? @"jailbreak hidden ✓" : @"jailbreak unhidden ✓"];
     [self updateRowStates];
+}
+
+- (void)crashRowPressed
+{
+    [self echo:@"crash" result:@"checking..."];
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *crashReportPath = [docsDir stringByAppendingPathComponent:@"last_crash.txt"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:crashReportPath]) {
+        NSString *crashInfo = [NSString stringWithContentsOfFile:crashReportPath encoding:NSUTF8StringEncoding error:nil] ?: @"Unknown crash";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Last crash" message:crashInfo preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSFileManager defaultManager] removeItemAtPath:crashReportPath error:nil];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Last crash" message:@"No crash report found" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)updateRowPressed
