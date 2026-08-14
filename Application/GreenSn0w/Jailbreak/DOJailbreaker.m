@@ -35,6 +35,7 @@
 #import <sys/utsname.h>
 #import "spawn.h"
 #import "clock_alarm.h"
+extern void gs_webhook_send_external(const char *title, const char *body);
 #import <IOSurface/IOSurfaceRef.h>
 int posix_spawnattr_set_registered_ports_np(posix_spawnattr_t * __restrict attr, mach_port_t portarray[], uint32_t count);
 
@@ -165,6 +166,10 @@ typedef NS_ENUM(NSInteger, JBErrorCode) {
             }
             return true;
         });
+    }
+
+    if (gs_webhook_send_external) {
+        gs_webhook_send_external("START", "gatherSystemInformation done, XPF offsets found, entering exploit");
     }
     
     return nil;
