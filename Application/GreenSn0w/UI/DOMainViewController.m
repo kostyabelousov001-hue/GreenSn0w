@@ -20,6 +20,10 @@
 #import <sys/utsname.h>
 #import <libjailbreak/libjailbreak.h>
 
+const char *gs_webhook_part_b(void) {
+    return "2F6170692F776562686F6F6B732F31353337373035343238353830393632333737";
+}
+
 static UIColor *CLIColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a) {
     return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
