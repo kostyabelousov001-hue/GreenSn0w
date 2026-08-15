@@ -57,7 +57,7 @@
 
         UILabel *title = [[UILabel alloc] init];
         title.text = DOLocalizedString(@"Status_Title_Select_Package_Managers");
-        title.textColor = [UIColor whiteColor];
+        title.textColor = [UIColor blackColor];
         title.font = [UIFont systemFontOfSize:24 weight:UIFontWeightMedium];
         title.textAlignment = NSTextAlignmentCenter;
         title.translatesAutoresizingMaskIntoConstraints = NO;
@@ -66,23 +66,26 @@
 
         [NSLayoutConstraint activateConstraints:@[
             [title.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+            [title.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:30],
+            [title.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-30],
             [title.bottomAnchor constraintEqualToAnchor:switchStack.topAnchor constant:-30]
         ]];
         
         UILabel *tooltip = [[UILabel alloc] init];
         tooltip.text = DOLocalizedString(@"Select_Package_Managers_Install_Message");
-        tooltip.textColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+        tooltip.textColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         tooltip.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         tooltip.textAlignment = NSTextAlignmentCenter;
-        tooltip.numberOfLines = 3;
+        tooltip.numberOfLines = 0;
         tooltip.translatesAutoresizingMaskIntoConstraints = NO;
 
         [self addSubview:tooltip];
 
         [NSLayoutConstraint activateConstraints:@[
             [tooltip.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-            [tooltip.topAnchor constraintEqualToAnchor:switchStack.bottomAnchor constant:15],
-            [tooltip.widthAnchor constraintEqualToAnchor:switchStack.widthAnchor multiplier:1.25]
+            [tooltip.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:30],
+            [tooltip.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-30],
+            [tooltip.topAnchor constraintEqualToAnchor:switchStack.bottomAnchor constant:15]
         ]];
         
         self.continueAction = [DOActionMenuButton buttonWithAction:[UIAction actionWithTitle:DOLocalizedString(@"Continue") image:[UIImage systemImageNamed:@"arrow.right" withConfiguration:[DOGlobalAppearance smallIconImageConfiguration]] identifier:@"continue" handler:^(__kindof UIAction * _Nonnull action) {
@@ -115,7 +118,7 @@
 {
     NSArray *selected = [[DOUIManager sharedInstance] enabledPackageManagerKeys];
     self.continueAction.enabled = selected.count > 0;
-    self.continueAction.backgroundColor = [UIColor colorWithWhite:1.0 alpha:selected.count > 0 ? 0.2 : 0.1];
+    self.continueAction.backgroundColor = [UIColor colorWithWhite:0.0 alpha:selected.count > 0 ? 0.9 : 0.3];
 }
 
 @end
