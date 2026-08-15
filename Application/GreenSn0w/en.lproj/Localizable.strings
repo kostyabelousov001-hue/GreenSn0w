@@ -128,3 +128,4 @@
 "Status_Title_Select_Package_Managers" = "Select Package Manager(s)";
 "Select_Package_Managers_Install_Message" = "If you are unsure which one to select, select Sileo";
 "Continue" = "Continue";
+"Settings_Rampage_Footer" = "RAMPAGE: shows a progress indicator overlay during jailbreak.";

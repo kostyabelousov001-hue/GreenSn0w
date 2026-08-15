@@ -36,37 +36,37 @@ static NSString *const kSpinnerFrames = @"⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏";
 
 + (UIColor *)terminalBackgroundColor
 {
-    return [UIColor colorWithWhite:0.0 alpha:0.97];
+    return [UIColor colorWithWhite:1.0 alpha:0.98];
 }
 
 + (UIColor *)terminalTextColor
 {
-    return [UIColor colorWithRed:0.35 green:0.93 blue:0.55 alpha:1.0];
+    return [UIColor colorWithWhite:0.10 alpha:1.0];
 }
 
 + (UIColor *)terminalDimColor
 {
-    return [UIColor colorWithRed:0.30 green:0.55 blue:0.40 alpha:1.0];
+    return [UIColor colorWithWhite:0.55 alpha:1.0];
 }
 
 + (UIColor *)terminalBrightColor
 {
-    return [UIColor colorWithRed:0.45 green:1.00 blue:0.62 alpha:1.0];
+    return [UIColor colorWithWhite:0.0 alpha:1.0];
 }
 
 + (UIColor *)terminalRedColor
 {
-    return [UIColor colorWithRed:1.00 green:0.42 blue:0.42 alpha:1.0];
+    return [UIColor colorWithRed:0.80 green:0.10 blue:0.10 alpha:1.0];
 }
 
 + (UIColor *)terminalYellowColor
 {
-    return [UIColor colorWithRed:1.00 green:0.85 blue:0.40 alpha:1.0];
+    return [UIColor colorWithRed:0.70 green:0.45 blue:0.0 alpha:1.0];
 }
 
 + (UIColor *)terminalCyanColor
 {
-    return [UIColor colorWithRed:0.40 green:0.90 blue:1.00 alpha:1.0];
+    return [UIColor colorWithRed:0.0 green:0.45 blue:0.55 alpha:1.0];
 }
 
 #pragma mark - Init
@@ -325,9 +325,22 @@ static NSString *const kSpinnerFrames = @"⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏";
 
 - (void)commitContent
 {
-    _textView.attributedText = _content;
+    const NSUInteger maxLength = 30000;
+    if (_content.length > maxLength) {
+        NSUInteger removeCount = _content.length - maxLength;
+        NSRange removeRange = NSMakeRange(0, removeCount);
+        if (_hasActiveLine && _activeLineStart >= removeRange.length) {
+            _activeLineStart -= removeRange.length;
+        }
+        [_content deleteCharactersInRange:removeRange];
+    }
     [UIView performWithoutAnimation:^{
-        [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 0)];
+        _textView.attributedText = _content;
+        CGFloat bottom = _textView.contentSize.height - _textView.bounds.size.height;
+        BOOL isAtBottom = _textView.contentOffset.y >= bottom - 40.0 || bottom <= 0;
+        if (isAtBottom) {
+            [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 0)];
+        }
     }];
 }
 

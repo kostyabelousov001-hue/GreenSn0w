@@ -265,6 +265,13 @@
             [jetsamSpecifier setProperty:@"jetsamOptionTitles" forKey:@"titlesDataSource"];
             [specifiers addObject:jetsamSpecifier];
             
+            PSSpecifier *rampageSpecifier = [PSSpecifier preferenceSpecifierNamed:@"MODE RAMPAGE" target:self set:defSetter get:defGetter detail:nil cell:PSSwitchCell edit:nil];
+            [rampageSpecifier setProperty:@YES forKey:@"enabled"];
+            [rampageSpecifier setProperty:@"rampageModeEnabled" forKey:@"key"];
+            [rampageSpecifier setProperty:@NO forKey:@"default"];
+            [rampageSpecifier setProperty:DOLocalizedString(@"Settings_Rampage_Footer") forKey:@"footerText"];
+            [specifiers addObject:rampageSpecifier];
+            
             if (!envManager.isJailbroken && !envManager.isInstalledThroughTrollStore) {
                 PSSpecifier *removeJailbreakSwitchSpecifier = [PSSpecifier preferenceSpecifierNamed:DOLocalizedString(@"Button_Remove_Jailbreak") target:self set:@selector(setRemoveJailbreakEnabled:specifier:) get:defGetter detail:nil cell:PSSwitchCell edit:nil];
                 [removeJailbreakSwitchSpecifier setProperty:@YES forKey:@"enabled"];

@@ -13,8 +13,10 @@
 #import "DOUpdateViewController.h"
 #import "DOLogCrashViewController.h"
 #import "DOTerminalLogView.h"
+#import "DORampageOverlayView.h"
 #import "DOPkgManagerPickerView.h"
 #import "DOSettingsController.h"
+#import "DOPreferenceManager.h"
 #import <pthread.h>
 #import <sys/sysctl.h>
 #import <sys/utsname.h>
@@ -24,10 +26,10 @@ static UIColor *CLIColor(CGFloat r, CGFloat g, CGFloat b, CGFloat a) {
     return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
 
-static UIColor *CLIGreen(void)        { return CLIColor(0.45, 1.00, 0.62, 1.0); }
-static UIColor *CLILightGreen(void)   { return CLIColor(0.55, 0.85, 0.65, 1.0); }
-static UIColor *CLIDimGreen(void)     { return CLIColor(0.30, 0.55, 0.40, 1.0); }
-static UIColor *CLIDim(void)          { return CLIColor(0.40, 0.50, 0.43, 1.0); }
+static UIColor *CLIGreen(void)        { return CLIColor(0.05, 0.05, 0.05, 1.0); }
+static UIColor *CLILightGreen(void)   { return CLIColor(0.15, 0.15, 0.15, 1.0); }
+static UIColor *CLIDimGreen(void)     { return CLIColor(0.42, 0.42, 0.42, 1.0); }
+static UIColor *CLIDim(void)          { return CLIColor(0.55, 0.55, 0.55, 1.0); }
 
 static UIFont *CLIFont(CGFloat size)
 {
@@ -50,6 +52,7 @@ static UIFont *CLIFont(CGFloat size)
 @property (nonatomic) BOOL isJailbreaking;
 @property(nonatomic) BOOL hideStatusBar;
 @property(nonatomic) BOOL hideHomeIndicator;
+@property (nonatomic) DORampageOverlayView *rampageOverlay;
 
 @end
 
@@ -60,7 +63,7 @@ static UIFont *CLIFont(CGFloat size)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setupTerminalUI];
 
     _blinkTimer = [NSTimer scheduledTimerWithTimeInterval:0.53 target:self selector:@selector(blinkTick) userInfo:nil repeats:YES];
@@ -83,6 +86,12 @@ static UIFont *CLIFont(CGFloat size)
 - (void)dealloc
 {
     [_blinkTimer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)rampageLogLine:(NSNotification *)notification
+{
+    [_rampageOverlay incrementCounter];
 }
 
 #pragma mark - Terminal UI
@@ -440,6 +449,20 @@ static UIFont *CLIFont(CGFloat size)
         [[DOUIManager sharedInstance] setLogView:logView];
         [UIView animateWithDuration:0.25 animations:^{
             logView.alpha = 1;
+        } completion:^(BOOL finished) {
+            BOOL rampageEnabled = [[DOPreferenceManager sharedManager] boolPreferenceValueForKey:@"rampageModeEnabled" fallback:NO];
+            if (rampageEnabled && !_rampageOverlay) {
+                _rampageOverlay = [[DORampageOverlayView alloc] init];
+                _rampageOverlay.translatesAutoresizingMaskIntoConstraints = NO;
+                [self.view addSubview:_rampageOverlay];
+                [NSLayoutConstraint activateConstraints:@[
+                    [_rampageOverlay.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+                    [_rampageOverlay.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+                    [_rampageOverlay.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+                    [_rampageOverlay.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:1.0/3.0],
+                ]];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rampageLogLine:) name:@"DORampageLogLineNotification" object:nil];
+            }
         }];
         [self runJailbreak];
     };
@@ -590,7 +613,7 @@ static UIFont *CLIFont(CGFloat size)
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDarkContent;
 }
 
 - (BOOL)prefersStatusBarHidden

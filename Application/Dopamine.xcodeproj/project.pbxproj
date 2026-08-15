@@ -1,4 +1,4 @@
-// !$*UTF8*$!
+﻿// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -27,6 +27,7 @@
 		042479B22B66916B0082581B /* DOLyricsLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042479942B66916B0082581B /* DOLyricsLogView.m */; };
 		042479B32B66916B0082581B /* DODebugLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042479952B66916B0082581B /* DODebugLogView.m */; };
 		63F8C71014F19138A805286B /* DOTerminalLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66604E16E259B4B642ED6C /* DOTerminalLogView.m */; };
+		3D0A110AF5E259B4B642ED6D /* DORampageOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A1109F5E259B4B642ED6D /* DORampageOverlayView.m */; };
 		042479B42B66916B0082581B /* DOProgressiveBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042479962B66916B0082581B /* DOProgressiveBlurView.m */; };
 		042479B52B66916B0082581B /* DOLyricsLogItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042479972B66916B0082581B /* DOLyricsLogItemView.m */; };
 		042479B62B66916B0082581B /* DOActionMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424799A2B66916B0082581B /* DOActionMenuButton.m */; };
@@ -230,6 +231,8 @@
 		042479952B66916B0082581B /* DODebugLogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DODebugLogView.m; sourceTree = "<group>"; };
 		0AFF0732E18036C8C7CD1B07 /* DOTerminalLogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOTerminalLogView.h; sourceTree = "<group>"; };
 		2C66604E16E259B4B642ED6C /* DOTerminalLogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOTerminalLogView.m; sourceTree = "<group>"; };
+		3D0A1108F5E259B4B642ED6D /* DORampageOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DORampageOverlayView.h; sourceTree = "<group>"; };
+		3D0A1109F5E259B4B642ED6D /* DORampageOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DORampageOverlayView.m; sourceTree = "<group>"; };
 		042479962B66916B0082581B /* DOProgressiveBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOProgressiveBlurView.m; sourceTree = "<group>"; };
 		042479972B66916B0082581B /* DOLyricsLogItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOLyricsLogItemView.m; sourceTree = "<group>"; };
 		042479982B66916B0082581B /* DOLyricsLogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOLyricsLogView.h; sourceTree = "<group>"; };
@@ -527,7 +530,9 @@
 				042479962B66916B0082581B /* DOProgressiveBlurView.m */,
 				042479952B66916B0082581B /* DODebugLogView.m */,
 				042479922B66916B0082581B /* DODebugLogView.h */,
-				0AFF0732E18036C8C7CD1B07 /* DOTerminalLogView.h */,
+						0AFF0732E18036C8C7CD1B07 /* DOTerminalLogView.h */,
+				3D0A1108F5E259B4B642ED6D /* DORampageOverlayView.h */,
+				3D0A1109F5E259B4B642ED6D /* DORampageOverlayView.m */,
 				2C66604E16E259B4B642ED6C /* DOTerminalLogView.m */,
 				042479932B66916B0082581B /* DOLogViewProtocol.h */,
 				04DD0B3B2B7C88210055DE4F /* DOLogCrashViewController.h */,
@@ -1066,6 +1071,7 @@
 				042479A22B66916B0082581B /* DOCreditsViewController.m in Sources */,
 				042479B32B66916B0082581B /* DODebugLogView.m in Sources */,
 				63F8C71014F19138A805286B /* DOTerminalLogView.m in Sources */,
+				3D0A110AF5E259B4B642ED6D /* DORampageOverlayView.m in Sources */,
 				042479AF2B66916B0082581B /* DONavigationController.m in Sources */,
 				04C246AE2B74ACA200E17924 /* DOAppSwitch.m in Sources */,
 				8C6599DB2C555A60000FF57F /* DOPSJetsamListItemsController.m in Sources */,
